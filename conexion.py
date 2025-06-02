@@ -1,5 +1,3 @@
-#Contribution by SJLS27
-
 import sqlite3 as sql 
 #conexion con sqlote
 

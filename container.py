@@ -3,6 +3,7 @@ import tkinter as tk
 from ventas import Ventas
 from inventario import Inventario
 from inventario_admin import Inventario_Admin
+import globales as g
 
 class Container(tk.Frame):
     def __init__(self, padre, controlador):
@@ -28,7 +29,11 @@ class Container(tk.Frame):
         self.show_frame(Inventario)
 
     def inventario_admin(self):
-        self.show_frame(Inventario_Admin)
+        if g.admin == False:
+            tk.messagebox.showerror("Error", "No tienes permisos para acceder a esta sección.")
+            return
+        else:
+            self.show_frame(Inventario_Admin)
 
     def widgets(self):
 
@@ -41,6 +46,7 @@ class Container(tk.Frame):
 
         btninventario = Button(frame1, bg="#1ab6ae", fg="white", font= "sans 18 bold", text="Ir a inventario", command=self.inventario)
         btninventario.place(x=500, y=130, width=240, height=60)
+        
 
         btninventario = Button(frame1, bg="#610505", fg="white", font= "sans 18 bold", text="Admin", command=self.inventario_admin)
         btninventario.place(x=500, y=230, width=240, height=60)

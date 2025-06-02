@@ -1,5 +1,5 @@
-from manager import Manager
+from inicio import Login
 
-if __name__=="__main__":
-    app = Manager()
-    app.mainloop()
+if __name__ == "__main__":
+    login = Login()
+    login.mainloop()
