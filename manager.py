@@ -1,15 +1,21 @@
-from tkinter import Tk, Frame
+from tkinter import Tk, Frame, messagebox
 from container import  Container
 
 class Manager(Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.title("Caja registradora version 1,0")
-        self.resizable(False, False)
-        self.configure(bg="#C6D9E3")
-        self.geometry("800x400+120+20")
+        self.title("Caja Registradora")
+        self.resizable(True, True)
+        self.configure(bg="#28404D")
+        self.geometry("1920x1000+0+0")
 
-        self.container = Frame(self, bg="#C6D9E3")
+        # Confirmación antes de cerrar la aplicación principal
+        try:
+            self.protocol("WM_DELETE_WINDOW", self.on_close)
+        except Exception:
+            pass
+
+        self.container = Frame(self, bg="#2D353A")
         self.container.pack(fill="both", expand=True)
 
         self.frames = {
@@ -28,6 +34,17 @@ class Manager(Tk):
     def show_frame(self, frame_class):
         frame = self.frames[frame_class]
         frame.tkraise()
+
+    def on_close(self):
+        try:
+            respuesta = messagebox.askyesno("Salir", "¿Estás seguro de que quieres cerrar el programa?")
+        except Exception:
+            respuesta = False
+        if respuesta:
+            try:
+                self.destroy()
+            except Exception:
+                pass
 
 def main():
     app = Manager()
